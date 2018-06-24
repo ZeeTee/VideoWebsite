@@ -1,0 +1,110 @@
+{% extends 'base.html' %}
+{% block title %}首页{% endblock %}
+{% load staticfiles %}
+{% block custom_bread %}
+{% endblock %}
+
+{% block custom_js %}
+    <script type="text/javascript" src="{% static 'js/index.js' %}"></script>
+{% endblock %}
+
+{% block content %}
+    <div class="banner">
+			<div class="wp">
+				<div class="fl">
+					<div class="imgslide">
+						<ul class="imgs">
+                            {% for banner in all_banners %}
+                            <li>
+                                <a href="">
+                                    <img width="1200" height="478" src="{{ MEDIA_URL }}{{ banner.image }}" />
+                                </a>
+                            </li>
+                            {% endfor %}
+
+						</ul>
+					</div>
+					<div class="unslider-arrow prev"></div>
+					<div class="unslider-arrow next"></div>
+				</div>
+            </div>
+    </div>
+<!--banner end-->
+
+<!--feature start-->
+	<section>
+		<div class="wp">
+			<ul class="feature">
+				<li class="feature1">
+					<img class="pic" src="{% static 'images/feature/feature_1.png' %}"/>
+
+				</li>
+				<li class="feature2">
+					<img class="pic" src="{% static 'images/feature/feature_2.png' %}"/>
+
+				</li>
+				<li class="feature3">
+					<img class="pic" src="{% static 'images/feature/feature_3.png' %}"/>
+
+				</li>
+				<li class="feature4">
+					<img class="pic" src="{% static 'images/feature/feature_4.png' %}"/>
+
+				</li>
+			</ul>
+		</div>
+	</section>
+<!--feature end-->
+<!--module1 start-->
+	<section>
+		<div class="module">
+			<div class="wp">
+				<h1>视频介绍</h1>
+				<div class="module1 eachmod">
+					<div class="module1_1 left">
+						<img width="228" height="614" src="{% static 'images/left_logo.jpg' %}"/>
+						<p class="fisrt_word"><br/>快速播放</p>
+						<a class="more" href="{% url 'video:video_list' %}">查看更多视频 ></a>
+					</div>
+					<div class="right group_list">
+						<div class="module1_2 box">
+							<div class="imgslide2">
+								<ul class="imgs">
+                                    {% for banner_video in banner_videos %}
+                                    <li>
+                                        <a href="{% url 'video:video_detail' banner_video.id %}">
+                                            <img width="470" height="300" src="{{ MEDIA_URL }}{{ banner_video.image }}" />
+                                        </a>
+                                    </li>
+                                    {% endfor %}
+								</ul>
+							</div>
+							<div class="unslider-arrow2 prev"></div>
+							<div class="unslider-arrow2 next"></div>
+						</div>
+                            {% for video in videos %}
+                            <div class="module1_{{ forloop.counter|add:2 }} box">
+                                <a href="{% url 'video:video_detail' video.id %}">
+                                    <img width="233" height="190" src="{{ MEDIA_URL }}{{ video.image }}"/>
+                                </a>
+                                <div class="des">
+                                    <a href="{% url 'video:video_detail' video.id %}">
+                                        <h2 title="{{ video.name }}">{{ video.name }}</h2>
+                                    </a>
+                                    <span class="fl">度：<i class="key"></i></span>
+                                    <span class="fr">播放次数：{{ vidoe.plays }}</span>
+                                </div>
+                                <div class="bottom">
+                                    <span class="fl" title=""></span>
+                                    <span class="star fr">{{ video.fav_nums }}</span>
+                                </div>
+                            </div>
+                            {% endfor %}
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+{% endblock %}
+
+
